@@ -21,6 +21,16 @@ function Base.getindex(l::Line, index::Int64)
     error("Index out of range")
 end
 
+function Base.length(l::Line) 
+    len = 0
+    for (i,) in enumerate(l)
+        len += 1
+    end 
+    return len
+end
+
+Base.lastindex(l::Line) = length(l)
+Base.getindex(l::Line, I) = [l[i] for i in I]
 
 function find_delimiter(line::Bview, delimiter::UInt8, state::Int) 
     # State refers to the last location we scanned
